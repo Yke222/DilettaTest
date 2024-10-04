@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  void _init() {
+  Future<void> _init() async {
     _controller.fetchListStarships();
     _controller.fetchWishlist();
   }
@@ -71,65 +71,69 @@ class _HomePageState extends State<HomePage> {
         );
       },
       builder: (context, state) {
-        return AppLoading(
-          loading: state.fetchListStarshipsStatus.isLoading,
-          child: Scaffold(
-            backgroundColor: AppColors.white,
-            appBar: AppBar(
-              title: Text(
-                'Olá',
-                style: context.textTheme.displaySmall,
-              ),
-              actions: [
-                GestureDetector(
-                  onTap: _goToWishList,
-                  child: Badge.count(
-                    count: state.wishlist.length,
-                    backgroundColor: AppColors.accent,
-                    child: const Icon(
-                      Icons.favorite_border,
+        if (state.failure is NoInternetFailure) return const NoInternetPage();
+        return RefreshIndicator(
+          onRefresh: _init,
+          child: AppLoading(
+            loading: state.fetchListStarshipsStatus.isLoading,
+            child: Scaffold(
+              backgroundColor: AppColors.white,
+              appBar: AppBar(
+                title: Text(
+                  'Olá',
+                  style: context.textTheme.displaySmall,
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: _goToWishList,
+                    child: Badge.count(
+                      count: state.wishlist.length,
+                      backgroundColor: AppColors.accent,
+                      child: const Icon(
+                        Icons.favorite_border,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-              ],
-            ),
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: CustomScrollView(
-                  slivers: [
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        childCount: state.listStarships.length,
-                        (_, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 4.0,
-                            ),
-                            child: StarshipItemWidget(
-                              title: state.listStarships[index].name,
-                              description: state.listStarships[index].model,
-                              onTheWishlist:
-                                  state.listStarships[index].onTheWishlist,
-                              onTapButton: () => _onTapButton(
-                                state.listStarships[index],
+                  const SizedBox(
+                    width: 16,
+                  ),
+                ],
+              ),
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          childCount: state.listStarships.length,
+                          (_, index) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 4.0,
                               ),
-                              onTap: () => DetailsItemBottomSheet.show(
-                                context: context,
-                                starShipEntity: state.listStarships[index],
+                              child: StarshipItemWidget(
+                                title: state.listStarships[index].name,
+                                description: state.listStarships[index].model,
+                                onTheWishlist:
+                                    state.listStarships[index].onTheWishlist,
                                 onTapButton: () => _onTapButton(
                                   state.listStarships[index],
                                 ),
+                                onTap: () => DetailsItemBottomSheet.show(
+                                  context: context,
+                                  starShipEntity: state.listStarships[index],
+                                  onTapButton: () => _onTapButton(
+                                    state.listStarships[index],
+                                  ),
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

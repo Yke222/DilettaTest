@@ -23,6 +23,7 @@ mixin _$HomeState {
   List<StarShipEntity> get wishlist => throw _privateConstructorUsedError;
   FetchDataStatus get updatehWishlistStatus =>
       throw _privateConstructorUsedError;
+  Failure? get failure => throw _privateConstructorUsedError;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -41,7 +42,8 @@ abstract class $HomeStateCopyWith<$Res> {
       List<StarShipEntity> listStarships,
       FetchDataStatus fetchWishlistStatus,
       List<StarShipEntity> wishlist,
-      FetchDataStatus updatehWishlistStatus});
+      FetchDataStatus updatehWishlistStatus,
+      Failure? failure});
 
   $FetchDataStatusCopyWith<$Res> get fetchListStarshipsStatus;
   $FetchDataStatusCopyWith<$Res> get fetchWishlistStatus;
@@ -68,6 +70,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? fetchWishlistStatus = null,
     Object? wishlist = null,
     Object? updatehWishlistStatus = null,
+    Object? failure = freezed,
   }) {
     return _then(_value.copyWith(
       fetchListStarshipsStatus: null == fetchListStarshipsStatus
@@ -90,6 +93,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.updatehWishlistStatus
           : updatehWishlistStatus // ignore: cast_nullable_to_non_nullable
               as FetchDataStatus,
+      failure: freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure?,
     ) as $Val);
   }
 
@@ -139,7 +146,8 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       List<StarShipEntity> listStarships,
       FetchDataStatus fetchWishlistStatus,
       List<StarShipEntity> wishlist,
-      FetchDataStatus updatehWishlistStatus});
+      FetchDataStatus updatehWishlistStatus,
+      Failure? failure});
 
   @override
   $FetchDataStatusCopyWith<$Res> get fetchListStarshipsStatus;
@@ -167,6 +175,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? fetchWishlistStatus = null,
     Object? wishlist = null,
     Object? updatehWishlistStatus = null,
+    Object? failure = freezed,
   }) {
     return _then(_$HomeStateImpl(
       fetchListStarshipsStatus: null == fetchListStarshipsStatus
@@ -189,6 +198,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value.updatehWishlistStatus
           : updatehWishlistStatus // ignore: cast_nullable_to_non_nullable
               as FetchDataStatus,
+      failure: freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure?,
     ));
   }
 }
@@ -201,7 +214,8 @@ class _$HomeStateImpl extends _HomeState {
       final List<StarShipEntity> listStarships = const [],
       this.fetchWishlistStatus = const FetchDataStatus.idle(),
       final List<StarShipEntity> wishlist = const [],
-      this.updatehWishlistStatus = const FetchDataStatus.idle()})
+      this.updatehWishlistStatus = const FetchDataStatus.idle(),
+      this.failure})
       : _listStarships = listStarships,
         _wishlist = wishlist,
         super._();
@@ -233,10 +247,12 @@ class _$HomeStateImpl extends _HomeState {
   @override
   @JsonKey()
   final FetchDataStatus updatehWishlistStatus;
+  @override
+  final Failure? failure;
 
   @override
   String toString() {
-    return 'HomeState(fetchListStarshipsStatus: $fetchListStarshipsStatus, listStarships: $listStarships, fetchWishlistStatus: $fetchWishlistStatus, wishlist: $wishlist, updatehWishlistStatus: $updatehWishlistStatus)';
+    return 'HomeState(fetchListStarshipsStatus: $fetchListStarshipsStatus, listStarships: $listStarships, fetchWishlistStatus: $fetchWishlistStatus, wishlist: $wishlist, updatehWishlistStatus: $updatehWishlistStatus, failure: $failure)';
   }
 
   @override
@@ -253,7 +269,8 @@ class _$HomeStateImpl extends _HomeState {
                 other.fetchWishlistStatus == fetchWishlistStatus) &&
             const DeepCollectionEquality().equals(other._wishlist, _wishlist) &&
             (identical(other.updatehWishlistStatus, updatehWishlistStatus) ||
-                other.updatehWishlistStatus == updatehWishlistStatus));
+                other.updatehWishlistStatus == updatehWishlistStatus) &&
+            (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
@@ -263,7 +280,8 @@ class _$HomeStateImpl extends _HomeState {
       const DeepCollectionEquality().hash(_listStarships),
       fetchWishlistStatus,
       const DeepCollectionEquality().hash(_wishlist),
-      updatehWishlistStatus);
+      updatehWishlistStatus,
+      failure);
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -280,7 +298,8 @@ abstract class _HomeState extends HomeState {
       final List<StarShipEntity> listStarships,
       final FetchDataStatus fetchWishlistStatus,
       final List<StarShipEntity> wishlist,
-      final FetchDataStatus updatehWishlistStatus}) = _$HomeStateImpl;
+      final FetchDataStatus updatehWishlistStatus,
+      final Failure? failure}) = _$HomeStateImpl;
   _HomeState._() : super._();
 
   @override
@@ -293,6 +312,8 @@ abstract class _HomeState extends HomeState {
   List<StarShipEntity> get wishlist;
   @override
   FetchDataStatus get updatehWishlistStatus;
+  @override
+  Failure? get failure;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.

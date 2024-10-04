@@ -15,6 +15,7 @@ class HomeState with _$HomeState {
     @Default(FetchDataStatus.idle()) FetchDataStatus fetchWishlistStatus,
     @Default([]) List<StarShipEntity> wishlist,
     @Default(FetchDataStatus.idle()) FetchDataStatus updatehWishlistStatus,
+    Failure? failure,
   }) = _HomeState;
 
   factory HomeState.initial() => HomeState();

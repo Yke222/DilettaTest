@@ -17,6 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(
       state.copyWith(
         fetchListStarshipsStatus: const FetchDataStatus.loading(),
+        failure: null,
       ),
     );
 
@@ -26,6 +27,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(
         state.copyWith(
           fetchListStarshipsStatus: const FetchDataStatus.error(),
+          failure: err,
         ),
       );
       return;
@@ -44,6 +46,7 @@ class HomeCubit extends Cubit<HomeState> {
       state.copyWith(
         fetchWishlistStatus: const FetchDataStatus.loading(),
         updatehWishlistStatus: const FetchDataStatus.idle(),
+        failure: null,
       ),
     );
 
@@ -53,6 +56,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(
         state.copyWith(
           fetchWishlistStatus: const FetchDataStatus.error(),
+          failure: err,
         ),
       );
       return;
@@ -70,6 +74,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(
       state.copyWith(
         updatehWishlistStatus: const FetchDataStatus.loading(),
+        failure: null,
       ),
     );
 
@@ -79,6 +84,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(
         state.copyWith(
           updatehWishlistStatus: const FetchDataStatus.error(),
+          failure: err,
         ),
       );
       return;
@@ -95,6 +101,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(
       state.copyWith(
         updatehWishlistStatus: const FetchDataStatus.loading(),
+        failure: null,
       ),
     );
 
@@ -104,6 +111,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(
         state.copyWith(
           updatehWishlistStatus: const FetchDataStatus.error(),
+          failure: err,
         ),
       );
       return;

@@ -2,10 +2,10 @@ import '../../../core/core.dart';
 import '../home.dart';
 
 abstract class IHomeRepository {
-  Future<(Exception?, List<StarShipEntity>?)> fetchListStarShips();
-  Exception? addToWishList(StarShipEntity starShipEntity);
-  Exception? removeFromWishList(StarShipEntity starShipEntity);
-  (Exception?, List<StarShipEntity>?) fetchWishList();
+  Future<(Failure?, List<StarShipEntity>?)> fetchListStarShips();
+  Failure? addToWishList(StarShipEntity starShipEntity);
+  Failure? removeFromWishList(StarShipEntity starShipEntity);
+  (Failure?, List<StarShipEntity>?) fetchWishList();
 }
 
 class HomeRepository implements IHomeRepository {
@@ -19,10 +19,15 @@ class HomeRepository implements IHomeRepository {
   final ILocalDatasource _localDatasource;
 
   @override
-  Future<(Exception?, List<StarShipEntity>?)> fetchListStarShips() async {
+  Future<(Failure?, List<StarShipEntity>?)> fetchListStarShips() async {
     try {
       final response = await _datasource.fetchStarChipsList();
       return (null, response);
+    } on NotInternetException {
+      return (
+        NoInternetFailure(),
+        null,
+      );
     } catch (_) {
       return (
         ServerErrorFailure(
@@ -34,7 +39,7 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
-  Exception? addToWishList(StarShipEntity starShipEntity) {
+  Failure? addToWishList(StarShipEntity starShipEntity) {
     try {
       final dto = StarShipResponseDTO.fromEntity(starShipEntity);
 
@@ -48,7 +53,7 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
-  (Exception?, List<StarShipEntity>?) fetchWishList() {
+  (Failure?, List<StarShipEntity>?) fetchWishList() {
     try {
       return (null, _localDatasource.fetchWishList());
     } catch (_) {
@@ -62,7 +67,7 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
-  Exception? removeFromWishList(StarShipEntity starShipEntity) {
+  Failure? removeFromWishList(StarShipEntity starShipEntity) {
     try {
       final dto = StarShipResponseDTO.fromEntity(starShipEntity);
 
