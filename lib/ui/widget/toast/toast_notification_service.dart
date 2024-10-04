@@ -67,13 +67,13 @@ class Toast {
     Color getBackgroundColor(ToastType type) {
       switch (type) {
         case ToastType.success:
-          return AppColors.success;
+          return const Color(0xFFC1FFB1);
         case ToastType.error:
-          return AppColors.danger;
+          return const Color(0xFFFFA39E);
         case ToastType.warning:
-          return AppColors.warning;
+          return const Color(0xFFFFE58F);
         case ToastType.info:
-          return AppColors.info;
+          return const Color(0xFF46A7E6);
       }
     }
 
@@ -94,7 +94,7 @@ class Toast {
       context: context,
       type: getToastType(type),
       style: ToastificationStyle.flatColored,
-      autoCloseDuration: duration ?? const Duration(seconds: 5),
+      autoCloseDuration: duration ?? const Duration(seconds: 3),
       title: title != null
           ? Text(
               title,
