@@ -1,17 +1,22 @@
 import '../../../core/core.dart';
-import '../datasource/datasource.dart';
-import '../entity/starship_entity.dart';
+import '../home.dart';
 
 abstract class IHomeRepository {
   Future<(Exception?, List<StarShipEntity>?)> fetchListStarShips();
+  Exception? addToWishList(StarShipEntity starShipEntity);
+  Exception? removeFromWishList(StarShipEntity starShipEntity);
+  (Exception?, List<StarShipEntity>?) fetchWishList();
 }
 
 class HomeRepository implements IHomeRepository {
   const HomeRepository({
     required IHomeDatasource datasource,
-  }) : _datasource = datasource;
+    required ILocalDatasource localDatasource,
+  })  : _datasource = datasource,
+        _localDatasource = localDatasource;
 
   final IHomeDatasource _datasource;
+  final ILocalDatasource _localDatasource;
 
   @override
   Future<(Exception?, List<StarShipEntity>?)> fetchListStarShips() async {
@@ -24,6 +29,48 @@ class HomeRepository implements IHomeRepository {
           message: 'ServerErrorFailure',
         ),
         null,
+      );
+    }
+  }
+
+  @override
+  Exception? addToWishList(StarShipEntity starShipEntity) {
+    try {
+      final dto = StarShipResponseDTO.fromEntity(starShipEntity);
+
+      _localDatasource.addToWishList(dto);
+      return null;
+    } catch (_) {
+      return ServerErrorFailure(
+        message: 'ServerErrorFailure',
+      );
+    }
+  }
+
+  @override
+  (Exception?, List<StarShipEntity>?) fetchWishList() {
+    try {
+      return (null, _localDatasource.fetchWishList());
+    } catch (_) {
+      return (
+        ServerErrorFailure(
+          message: 'ServerErrorFailure',
+        ),
+        null
+      );
+    }
+  }
+
+  @override
+  Exception? removeFromWishList(StarShipEntity starShipEntity) {
+    try {
+      final dto = StarShipResponseDTO.fromEntity(starShipEntity);
+
+      _localDatasource.removeFronWishList(dto);
+      return null;
+    } catch (_) {
+      return ServerErrorFailure(
+        message: 'ServerErrorFailure',
       );
     }
   }

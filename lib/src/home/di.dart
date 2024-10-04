@@ -10,9 +10,14 @@ class HomeInjector extends Injector {
       ),
     );
 
+    i.registerLazySingleton<ILocalDatasource>(
+      LocalDatasource.new,
+    );
+
     i.registerLazySingleton<IHomeRepository>(
       () => HomeRepository(
         datasource: i.get(),
+        localDatasource: i.get(),
       ),
     );
 

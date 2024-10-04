@@ -11,7 +11,10 @@ class HomeState with _$HomeState {
 
   factory HomeState({
     @Default(FetchDataStatus.idle()) FetchDataStatus fetchListStarshipsStatus,
-    @Default([]) List<StarShipEntity> listStarshipsStatus,
+    @Default([]) List<StarShipEntity> listStarships,
+    @Default(FetchDataStatus.idle()) FetchDataStatus fetchWishlistStatus,
+    @Default([]) List<StarShipEntity> wishlist,
+    @Default(FetchDataStatus.idle()) FetchDataStatus updatehWishlistStatus,
   }) = _HomeState;
 
   factory HomeState.initial() => HomeState();

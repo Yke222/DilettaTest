@@ -6,7 +6,8 @@ extension FullPath on HomeRoutesEnum {
 }
 
 enum HomeRoutesEnum {
-  home('home', 'home');
+  home('home', 'home'),
+  wishList('wish-list', 'wish-list');
 
   const HomeRoutesEnum(
     this.routePath,
@@ -28,8 +29,8 @@ class HomeRouter {
       builder: (context, state) => const HomePage(),
     ),
     GoRoute(
-      path: HomeRoutesEnum.home.fullPath,
-      builder: (context, state) => const HomePage(),
+      path: HomeRoutesEnum.wishList.fullPath,
+      builder: (context, state) => const WishListPage(),
     ),
   ];
 }

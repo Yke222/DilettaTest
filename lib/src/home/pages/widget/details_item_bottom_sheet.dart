@@ -8,17 +8,17 @@ import '../../entity/starship_entity.dart';
 class DetailsItemBottomSheet extends StatefulWidget {
   const DetailsItemBottomSheet({
     required this.starShipEntity,
-    required this.onTapAddToList,
+    required this.onTapButton,
     super.key,
   });
 
   final StarShipEntity starShipEntity;
-  final VoidCallback onTapAddToList;
+  final VoidCallback onTapButton;
 
   static void show({
     required BuildContext context,
     required StarShipEntity starShipEntity,
-    required VoidCallback onTapAddToList,
+    required VoidCallback onTapButton,
   }) {
     showModalBottomSheet(
       context: context,
@@ -34,7 +34,7 @@ class DetailsItemBottomSheet extends StatefulWidget {
       ),
       builder: (context) => DetailsItemBottomSheet(
         starShipEntity: starShipEntity,
-        onTapAddToList: onTapAddToList,
+        onTapButton: onTapButton,
       ),
     );
   }
@@ -44,6 +44,11 @@ class DetailsItemBottomSheet extends StatefulWidget {
 }
 
 class _DetailsItemBottomSheet extends State<DetailsItemBottomSheet> {
+  void _onTapButton() {
+    context.pop();
+    widget.onTapButton();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -105,9 +110,23 @@ class _DetailsItemBottomSheet extends State<DetailsItemBottomSheet> {
             description: widget.starShipEntity.maxAtmospheringSpeed,
           ),
           TextButton.icon(
-            onPressed: widget.onTapAddToList,
-            label: const Text('Adicionar a lista de desejos'),
-            icon: const Icon(Icons.add),
+            onPressed: _onTapButton,
+            label: Text(
+              widget.starShipEntity.onTheWishlist
+                  ? 'Remover da lista de desejos'
+                  : 'Adicionar a lista de desejos',
+              style: context.textTheme.labelLarge?.copyWith(
+                color: widget.starShipEntity.onTheWishlist
+                    ? AppColors.danger
+                    : AppColors.info,
+              ),
+            ),
+            icon: Icon(
+              widget.starShipEntity.onTheWishlist ? Icons.remove : Icons.add,
+              color: widget.starShipEntity.onTheWishlist
+                  ? AppColors.danger
+                  : AppColors.info,
+            ),
           ),
         ],
       ),

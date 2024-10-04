@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/core.dart';
+import '../entity/starship_entity.dart';
 import '../repository/repository.dart';
 import 'home_state.dart';
 
@@ -33,7 +34,112 @@ class HomeCubit extends Cubit<HomeState> {
     emit(
       state.copyWith(
         fetchListStarshipsStatus: const FetchDataStatus.success(),
-        listStarshipsStatus: list ?? [],
+        listStarships: list ?? [],
+      ),
+    );
+  }
+
+  void fetchWishlist() {
+    emit(
+      state.copyWith(
+        fetchWishlistStatus: const FetchDataStatus.loading(),
+        updatehWishlistStatus: const FetchDataStatus.idle(),
+      ),
+    );
+
+    final (err, list) = _repository.fetchWishList();
+
+    if (err != null) {
+      emit(
+        state.copyWith(
+          fetchWishlistStatus: const FetchDataStatus.error(),
+        ),
+      );
+      return;
+    }
+
+    emit(
+      state.copyWith(
+        fetchWishlistStatus: const FetchDataStatus.success(),
+        wishlist: list ?? [],
+      ),
+    );
+  }
+
+  void addToWishlist(StarShipEntity starChipEntity) {
+    emit(
+      state.copyWith(
+        updatehWishlistStatus: const FetchDataStatus.loading(),
+      ),
+    );
+
+    final err = _repository.addToWishList(starChipEntity);
+
+    if (err != null) {
+      emit(
+        state.copyWith(
+          updatehWishlistStatus: const FetchDataStatus.error(),
+        ),
+      );
+      return;
+    }
+
+    emit(
+      state.copyWith(
+        updatehWishlistStatus: const FetchDataStatus.success(),
+      ),
+    );
+  }
+
+  void removeFromWishlist(StarShipEntity starChipEntity) {
+    emit(
+      state.copyWith(
+        updatehWishlistStatus: const FetchDataStatus.loading(),
+      ),
+    );
+
+    final err = _repository.removeFromWishList(starChipEntity);
+
+    if (err != null) {
+      emit(
+        state.copyWith(
+          updatehWishlistStatus: const FetchDataStatus.error(),
+        ),
+      );
+      return;
+    }
+
+    emit(
+      state.copyWith(
+        updatehWishlistStatus: const FetchDataStatus.success(),
+      ),
+    );
+  }
+
+  void updateCurrentList() {
+    emit(
+      state.copyWith(
+        fetchListStarshipsStatus: const FetchDataStatus.loading(),
+      ),
+    );
+
+    final newList = List<StarShipEntity>.from(state.listStarships).toList();
+    final wishlist = state.wishlist.map(
+      (e) => e.name,
+    ).toList();
+
+    final updatedList = newList
+        .map(
+          (e) => wishlist.contains(e.name)
+              ? e.copyWith(onTheWishlist: true)
+              : e.copyWith(onTheWishlist: false),
+        )
+        .toList();
+
+    emit(
+      state.copyWith(
+        listStarships: updatedList,
+        fetchListStarshipsStatus: const FetchDataStatus.success(),
       ),
     );
   }

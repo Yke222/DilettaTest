@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-
+import 'package:go_router/go_router.dart';
 import '/../core/core.dart';
 import '../../../ui/theme/colors.dart';
 import '../../../ui/widget/widget.dart';
@@ -32,62 +32,97 @@ class _HomePageState extends State<HomePage> {
 
   void _init() {
     _controller.fetchListStarships();
+    _controller.fetchWishlist();
+  }
+
+  void _onTapButton(StarShipEntity starChipEntity) {
+    if (starChipEntity.onTheWishlist) {
+      _removeFromWishList(starChipEntity);
+      return;
+    }
+    _addToWishList(starChipEntity);
+  }
+
+  void _addToWishList(StarShipEntity starChipEntity) {
+    _controller.addToWishlist(starChipEntity);
+  }
+
+  void _removeFromWishList(StarShipEntity starChipEntity) {
+    _controller.removeFromWishlist(starChipEntity);
+  }
+
+  Future<void> _goToWishList() async {
+    await context.push(HomeRoutesEnum.wishList.fullPath);
+    _init();
+  }
+
+  void _onSuccessUpdateList() {
+    _controller.fetchWishlist();
+    _controller.updateCurrentList();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
       bloc: _controller,
-      listener: (context, state) {},
+      listener: (context, state) {
+        state.updatehWishlistStatus.whenOrNull(
+          success: _onSuccessUpdateList,
+        );
+      },
       builder: (context, state) {
         return AppLoading(
           loading: state.fetchListStarshipsStatus.isLoading,
           child: Scaffold(
             backgroundColor: AppColors.white,
+            appBar: AppBar(
+              title: Text(
+                'Olá',
+                style: context.textTheme.displaySmall,
+              ),
+              actions: [
+                GestureDetector(
+                  onTap: _goToWishList,
+                  child: Badge.count(
+                    count: state.wishlist.length,
+                    backgroundColor: AppColors.accent,
+                    child: const Icon(
+                      Icons.favorite_border,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+              ],
+            ),
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: CustomScrollView(
                   slivers: [
-                    SliverToBoxAdapter(
-                      child: Row(
-                        children: [
-                          Text(
-                            'Olá',
-                            style: context.textTheme.displaySmall,
-                          ),
-                          const Spacer(),
-                          Badge.count(
-                            count: 10,
-                            backgroundColor: AppColors.accent,
-                            child: const Icon(
-                              Icons.favorite_border,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 16,
-                          ),
-                        ],
-                      ),
-                    ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
-                        childCount: state.listStarshipsStatus.length,
+                        childCount: state.listStarships.length,
                         (_, index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                               vertical: 4.0,
                             ),
                             child: StarshipItemWidget(
-                              title: state.listStarshipsStatus[index].name,
-                              description:
-                                  state.listStarshipsStatus[index].model,
-                              onTapAddToList: () {},
+                              title: state.listStarships[index].name,
+                              description: state.listStarships[index].model,
+                              onTheWishlist:
+                                  state.listStarships[index].onTheWishlist,
+                              onTapButton: () => _onTapButton(
+                                state.listStarships[index],
+                              ),
                               onTap: () => DetailsItemBottomSheet.show(
                                 context: context,
-                                starShipEntity:
-                                    state.listStarshipsStatus[index],
-                                onTapAddToList: () {},
+                                starShipEntity: state.listStarships[index],
+                                onTapButton: () => _onTapButton(
+                                  state.listStarships[index],
+                                ),
                               ),
                             ),
                           );
@@ -101,62 +136,6 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       },
-    );
-  }
-}
-
-class StarshipItemWidget extends StatelessWidget {
-  const StarshipItemWidget({
-    required this.title,
-    required this.description,
-    required this.onTap,
-    required this.onTapAddToList,
-    super.key,
-  });
-
-  final String title;
-  final String description;
-  final VoidCallback onTap;
-  final VoidCallback onTapAddToList;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: context.textTheme.bodySmall,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                description,
-                style: context.textTheme.bodySmall,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Align(
-                child: TextButton.icon(
-                  onPressed: onTapAddToList,
-                  label: const Text('Adicionar a lista de desejos'),
-                  icon: const Icon(Icons.add),
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

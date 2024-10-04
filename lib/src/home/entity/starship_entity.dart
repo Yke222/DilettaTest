@@ -9,6 +9,7 @@ class StarShipEntity extends Equatable {
   final String passengers;
   final String cargoCapacity;
   final String starshipClass;
+  final bool onTheWishlist;
 
   const StarShipEntity({
     required this.name,
@@ -19,6 +20,7 @@ class StarShipEntity extends Equatable {
     required this.passengers,
     required this.cargoCapacity,
     required this.starshipClass,
+    this.onTheWishlist = false,
   });
 
   @override
@@ -32,4 +34,28 @@ class StarShipEntity extends Equatable {
         cargoCapacity,
         starshipClass,
       ];
+
+  StarShipEntity copyWith({
+    String? name,
+    String? model,
+    String? costInCredits,
+    String? length,
+    String? maxAtmospheringSpeed,
+    String? passengers,
+    String? cargoCapacity,
+    String? starshipClass,
+    bool? onTheWishlist,
+  }) {
+    return StarShipEntity(
+      name: name ?? this.name,
+      model: model ?? this.model,
+      costInCredits: costInCredits ?? this.costInCredits,
+      length: length ?? this.length,
+      maxAtmospheringSpeed: maxAtmospheringSpeed ?? this.maxAtmospheringSpeed,
+      passengers: passengers ?? this.passengers,
+      cargoCapacity: cargoCapacity ?? this.cargoCapacity,
+      starshipClass: starshipClass ?? this.starshipClass,
+      onTheWishlist: onTheWishlist ?? this.onTheWishlist,
+    );
+  }
 }
