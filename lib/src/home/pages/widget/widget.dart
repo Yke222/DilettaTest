@@ -1,0 +1,1 @@
+export 'details_item_bottom_sheet.dart';

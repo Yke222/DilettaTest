@@ -1,5 +1,5 @@
 .PHONY: dart
-buildRunner: 
+br: 
 	@dart run build_runner build -d
 
 .PHONY: flutter

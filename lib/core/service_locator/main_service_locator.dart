@@ -1,4 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_alice/alice.dart';
 import 'package:get_it/get_it.dart';
 
@@ -24,8 +26,16 @@ class MainServiceLocator extends Injector {
       () => InternetConnectivityImpl(connectivity: Connectivity()),
     );
 
+    i.registerLazySingleton<Dio>(
+      () => CustomDioClient.initialize(
+        baseUrl: apiUrl,
+        internetConnectivity: getIt.get<InternetConnectivity>(),
+        debugMode: kDebugMode,
+      ),
+    );
+
     i.registerLazySingleton<HttpClient>(
-      () => DioHttpAdapter(baseUrl: apiUrl),
+      () => HttpClientImpl(dioInstance: i.get()),
     );
 
     HomeInjector().inject();
