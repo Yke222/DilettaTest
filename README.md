@@ -63,4 +63,11 @@ Com o Flutter instalado na sua máquina, basta clonar este repositório localmen
 
 ```
 flutter pub get
+
+flutter run
 ```
+
+### Make
+
+Existe um arquivo na raiz do projeto chamado makefile, nele contém alguns alias para alguns comandos utilizados no dia a dia. 
+Para executa-los deve-se primeiro instalar o MAKE, em seu sistema operacional.

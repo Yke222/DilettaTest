@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '/../core/core.dart';
@@ -78,8 +79,8 @@ class _DetailsItemBottomSheet extends State<DetailsItemBottomSheet> {
             widget.starShipEntity.name,
             style: context.textTheme.displaySmall,
           ),
-          const SizedBox(
-            height: 8,
+          SizedBox(
+            height: 8.h,
           ),
           _TitleDescriptionWidget(
             title: 'Modelo',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 
 import '/../core/core.dart';
@@ -91,9 +92,9 @@ class _WishListPageState extends State<WishListPage> {
                                 onChange: _onChangeFilter,
                               ),
                             ),
-                            const SliverToBoxAdapter(
+                            SliverToBoxAdapter(
                               child: SizedBox(
-                                height: 16,
+                                height: 16.h,
                               ),
                             ),
                             SliverList(

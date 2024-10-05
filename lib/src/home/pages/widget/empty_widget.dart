@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/core.dart';
 
@@ -12,8 +13,8 @@ class EmptyWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Image.asset(
-          width: 150,
-          height: 100,
+          width: 150.w,
+          height: 100.h,
           'assets/images/empty.png',
         ),
         

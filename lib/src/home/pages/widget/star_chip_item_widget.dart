@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/../core/core.dart';
 import '../../../../ui/theme/colors.dart';
@@ -39,8 +40,8 @@ class StarshipItemWidget extends StatelessWidget {
                 title,
                 style: context.textTheme.headlineMedium,
               ),
-              const SizedBox(
-                height: 16,
+              SizedBox(
+                height: 16.h,
               ),
               Row(
                 children: [
@@ -55,8 +56,8 @@ class StarshipItemWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 8,
+              SizedBox(
+                height: 8.h,
               ),
               Row(
                 children: [
@@ -71,8 +72,8 @@ class StarshipItemWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 8,
+              SizedBox(
+                height: 8.h,
               ),
               Row(
                 children: [
@@ -107,8 +108,8 @@ class StarshipItemWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 8,
+              SizedBox(
+                height: 8.h,
               ),
             ],
           ),
