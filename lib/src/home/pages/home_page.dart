@@ -4,11 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 import '/../core/core.dart';
-import '../../../ui/theme/colors.dart';
-import '../../../ui/widget/toast/toast_notification_service.dart';
-import '../../../ui/widget/widget.dart';
+import '../../../ui/ui.dart';
 import '../home.dart';
-import 'widget/widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -95,9 +92,9 @@ class _HomePageState extends State<HomePage> {
                         style: context.textTheme.displaySmall,
                       ),
                       actions: [
-                        GestureDetector(
-                          onTap: _goToWishList,
-                          child: Badge.count(
+                        IconButton(
+                          onPressed: _goToWishList,
+                          icon: Badge.count(
                             count: state.wishlist.length,
                             backgroundColor: AppColors.accent,
                             child: const Icon(

@@ -31,8 +31,9 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   toastification: ^2.1.0
 
-
 dev_dependencies:
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
 

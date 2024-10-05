@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '/../core/core.dart';
-import '../../../ui/theme/colors.dart';
-import '../../../ui/widget/widget.dart';
+import '../../../ui/ui.dart';
 import '../home.dart';
-import 'widget/widget.dart';
 
 class WishListPage extends StatefulWidget {
   const WishListPage({

@@ -4,10 +4,17 @@ Projeto de construção do aplicativo de wish-list, como desafio técnico da Dil
 
 O propósito do projeto é a construção de um aplicação Android e IOS, com Flutter.
 
+Para esse desafio foi escolhida a API de StarWars que retorna diversos dados referentes a este universo.
+Mais especificamente, foi selecionada a feature de starships.
+
 ## 🗂️ Estrutura de arquivos
 
 O projeto utiliza uma arquitetura `feature-based` que é focada em organizar o projeto por recursos(ex: auth, home…).  
 Essa arquitetura suporta projetos de grande, possibilitando que times trabalhem de forma autônoma em cada recursos sem causar interdependência entre as equipes.  
+
+Por ser um projeto pequeno, não há necessidade de implementação ao pé da letra do Clean Arch, mas mesmo sem sua adoção completa, não diversos pontos do código 
+temos aplicado os princípios do SOLID e alguns DesignPatterns.
+
 Atualmente a estrutura do projeto está seguindo esse padrão: 
 
 ```
