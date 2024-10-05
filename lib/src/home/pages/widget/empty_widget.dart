@@ -17,7 +17,6 @@ class EmptyWidget extends StatelessWidget {
           height: 100.h,
           'assets/images/empty.png',
         ),
-        
         Text(
           'Nada salvo',
           textAlign: TextAlign.center,
