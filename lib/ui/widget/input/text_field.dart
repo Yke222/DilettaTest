@@ -4,23 +4,22 @@ import '/../core/core.dart';
 import '../../theme/colors.dart';
 
 class TextfieldWidget extends StatefulWidget {
+  
+  final TextInputType inputType;
+  final bool disabled;
   final Widget? suffix;
   final Widget? prefix;
-  final TextInputType inputType;
   final bool? autoFocus;
-
-  final void Function(String?)? onChange;
+  final ValueChanged<String?>? onChange;
   final TextEditingController? controller;
   final String? label;
 
-  final bool disabled;
-
   const TextfieldWidget({
+    this.disabled = false,
+    this.inputType = TextInputType.text,
     this.suffix,
     this.prefix,
-    this.disabled = false,
     this.autoFocus,
-    this.inputType = TextInputType.text,
     this.onChange,
     this.controller,
     this.label,

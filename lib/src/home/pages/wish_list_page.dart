@@ -30,6 +30,12 @@ class _WishListPageState extends State<WishListPage> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
   void _init() {
     _controller.fetchWishlist();
   }

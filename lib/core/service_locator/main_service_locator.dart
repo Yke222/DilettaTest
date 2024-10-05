@@ -19,6 +19,7 @@ class MainServiceLocator extends Injector {
       () => Alice(
         navigatorKey: rootNavigatorKey,
         showNotification: false,
+        darkTheme: true,
       ),
     );
 
@@ -28,6 +29,7 @@ class MainServiceLocator extends Injector {
 
     i.registerLazySingleton<Dio>(
       () => CustomDioClient.initialize(
+        alice: i.get(),
         baseUrl: apiUrl,
         debugMode: kDebugMode,
       ),

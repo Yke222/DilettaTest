@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_alice/alice.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class CustomDioClient {
@@ -7,6 +8,7 @@ class CustomDioClient {
 
   static Dio initialize({
     required String baseUrl,
+    required Alice alice,
     bool debugMode = false,
   }) {
     return Dio()
@@ -17,6 +19,7 @@ class CustomDioClient {
       ..options.contentType = Headers.jsonContentType
       ..interceptors.addAll(
         [
+          if (debugMode) alice.getDioInterceptor(),
           if (debugMode)
             PrettyDioLogger(
               requestHeader: true,

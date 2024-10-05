@@ -81,75 +81,84 @@ class _HomePageState extends State<HomePage> {
           onRefresh: _init,
           child: (state.failure != null)
               ? NoInternetPage(
-                onTapRetry: _init,
-              )
+                  onTapRetry: _init,
+                )
               : AppLoading(
                   loading: state.fetchListStarshipsStatus.isLoading,
                   child: Scaffold(
                     backgroundColor: AppColors.white,
-                    appBar: AppBar(
-                      scrolledUnderElevation: 0,
-                      title: Text(
-                        'Olá',
-                        style: context.textTheme.displaySmall,
-                      ),
-                      actions: [
-                        IconButton(
-                          onPressed: _goToWishList,
-                          icon: Badge.count(
-                            count: state.wishlist.length,
-                            backgroundColor: AppColors.accent,
-                            child: const Icon(
-                              Icons.favorite_border,
+                    appBar: state.fetchListStarshipsStatus.isLoading
+                        ? null
+                        : AppBar(
+                            scrolledUnderElevation: 0,
+                            title: Text(
+                              'Olá',
+                              style: context.textTheme.displaySmall,
                             ),
+                            actions: [
+                              IconButton(
+                                onPressed: _goToWishList,
+                                icon: Badge.count(
+                                  count: state.wishlist.length,
+                                  backgroundColor: AppColors.accent,
+                                  child: const Icon(
+                                    Icons.favorite_border,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 16,
+                              ),
+                            ],
                           ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                      ],
-                    ),
-                    body: SafeArea(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: CustomScrollView(
-                          slivers: [
-                            SliverList(
-                              delegate: SliverChildBuilderDelegate(
-                                childCount: state.listStarships.length,
-                                (_, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 4.0,
+                    body: state.fetchListStarshipsStatus.isLoading
+                        ? null
+                        : SafeArea(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 24),
+                              child: CustomScrollView(
+                                slivers: [
+                                  SliverList(
+                                    delegate: SliverChildBuilderDelegate(
+                                      childCount: state.listStarships.length,
+                                      (_, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 4.0,
+                                          ),
+                                          child: StarshipItemWidget(
+                                            title:
+                                                state.listStarships[index].name,
+                                            starShipClass: state
+                                                .listStarships[index]
+                                                .starshipClass,
+                                            description: state
+                                                .listStarships[index].model,
+                                            onTheWishlist: state
+                                                .listStarships[index]
+                                                .onTheWishlist,
+                                            onTapButton: () => _onTapButton(
+                                              state.listStarships[index],
+                                            ),
+                                            onTap: () =>
+                                                DetailsItemBottomSheet.show(
+                                              context: context,
+                                              starShipEntity:
+                                                  state.listStarships[index],
+                                              onTapButton: () => _onTapButton(
+                                                state.listStarships[index],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     ),
-                                    child: StarshipItemWidget(
-                                      title: state.listStarships[index].name,
-                                      starShipClass: state
-                                          .listStarships[index].starshipClass,
-                                      description:
-                                          state.listStarships[index].model,
-                                      onTheWishlist: state
-                                          .listStarships[index].onTheWishlist,
-                                      onTapButton: () => _onTapButton(
-                                        state.listStarships[index],
-                                      ),
-                                      onTap: () => DetailsItemBottomSheet.show(
-                                        context: context,
-                                        starShipEntity:
-                                            state.listStarships[index],
-                                        onTapButton: () => _onTapButton(
-                                          state.listStarships[index],
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
+                          ),
                   ),
                 ),
         );
