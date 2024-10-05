@@ -71,7 +71,7 @@ class HomeRepository implements IHomeRepository {
     try {
       final dto = StarShipResponseDTO.fromEntity(starShipEntity);
 
-      _localDatasource.removeFronWishList(dto);
+      _localDatasource.removeFromWishList(dto);
       return null;
     } catch (_) {
       return ServerErrorFailure(

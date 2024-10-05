@@ -3,7 +3,7 @@ import '../home.dart';
 abstract class ILocalDatasource {
   List<StarShipResponseDTO> fetchWishList();
   void addToWishList(StarShipResponseDTO dto);
-  void removeFronWishList(StarShipResponseDTO dto);
+  void removeFromWishList(StarShipResponseDTO dto);
 }
 
 class LocalDatasource implements ILocalDatasource {
@@ -17,7 +17,7 @@ class LocalDatasource implements ILocalDatasource {
   }
 
   @override
-  void removeFronWishList(StarShipResponseDTO dto) {
+  void removeFromWishList(StarShipResponseDTO dto) {
     wishlist.removeWhere(
       (element) => element.name == dto.name,
     );
