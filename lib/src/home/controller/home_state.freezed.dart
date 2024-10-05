@@ -21,6 +21,8 @@ mixin _$HomeState {
   List<StarShipEntity> get listStarships => throw _privateConstructorUsedError;
   FetchDataStatus get fetchWishlistStatus => throw _privateConstructorUsedError;
   List<StarShipEntity> get wishlist => throw _privateConstructorUsedError;
+  List<StarShipEntity> get filteredWishlist =>
+      throw _privateConstructorUsedError;
   FetchDataStatus get updatehWishlistStatus =>
       throw _privateConstructorUsedError;
   Failure? get failure => throw _privateConstructorUsedError;
@@ -42,6 +44,7 @@ abstract class $HomeStateCopyWith<$Res> {
       List<StarShipEntity> listStarships,
       FetchDataStatus fetchWishlistStatus,
       List<StarShipEntity> wishlist,
+      List<StarShipEntity> filteredWishlist,
       FetchDataStatus updatehWishlistStatus,
       Failure? failure});
 
@@ -69,6 +72,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? listStarships = null,
     Object? fetchWishlistStatus = null,
     Object? wishlist = null,
+    Object? filteredWishlist = null,
     Object? updatehWishlistStatus = null,
     Object? failure = freezed,
   }) {
@@ -88,6 +92,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       wishlist: null == wishlist
           ? _value.wishlist
           : wishlist // ignore: cast_nullable_to_non_nullable
+              as List<StarShipEntity>,
+      filteredWishlist: null == filteredWishlist
+          ? _value.filteredWishlist
+          : filteredWishlist // ignore: cast_nullable_to_non_nullable
               as List<StarShipEntity>,
       updatehWishlistStatus: null == updatehWishlistStatus
           ? _value.updatehWishlistStatus
@@ -146,6 +154,7 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       List<StarShipEntity> listStarships,
       FetchDataStatus fetchWishlistStatus,
       List<StarShipEntity> wishlist,
+      List<StarShipEntity> filteredWishlist,
       FetchDataStatus updatehWishlistStatus,
       Failure? failure});
 
@@ -174,6 +183,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? listStarships = null,
     Object? fetchWishlistStatus = null,
     Object? wishlist = null,
+    Object? filteredWishlist = null,
     Object? updatehWishlistStatus = null,
     Object? failure = freezed,
   }) {
@@ -193,6 +203,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       wishlist: null == wishlist
           ? _value._wishlist
           : wishlist // ignore: cast_nullable_to_non_nullable
+              as List<StarShipEntity>,
+      filteredWishlist: null == filteredWishlist
+          ? _value._filteredWishlist
+          : filteredWishlist // ignore: cast_nullable_to_non_nullable
               as List<StarShipEntity>,
       updatehWishlistStatus: null == updatehWishlistStatus
           ? _value.updatehWishlistStatus
@@ -214,10 +228,12 @@ class _$HomeStateImpl extends _HomeState {
       final List<StarShipEntity> listStarships = const [],
       this.fetchWishlistStatus = const FetchDataStatus.idle(),
       final List<StarShipEntity> wishlist = const [],
+      final List<StarShipEntity> filteredWishlist = const [],
       this.updatehWishlistStatus = const FetchDataStatus.idle(),
       this.failure})
       : _listStarships = listStarships,
         _wishlist = wishlist,
+        _filteredWishlist = filteredWishlist,
         super._();
 
   @override
@@ -244,6 +260,16 @@ class _$HomeStateImpl extends _HomeState {
     return EqualUnmodifiableListView(_wishlist);
   }
 
+  final List<StarShipEntity> _filteredWishlist;
+  @override
+  @JsonKey()
+  List<StarShipEntity> get filteredWishlist {
+    if (_filteredWishlist is EqualUnmodifiableListView)
+      return _filteredWishlist;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filteredWishlist);
+  }
+
   @override
   @JsonKey()
   final FetchDataStatus updatehWishlistStatus;
@@ -252,7 +278,7 @@ class _$HomeStateImpl extends _HomeState {
 
   @override
   String toString() {
-    return 'HomeState(fetchListStarshipsStatus: $fetchListStarshipsStatus, listStarships: $listStarships, fetchWishlistStatus: $fetchWishlistStatus, wishlist: $wishlist, updatehWishlistStatus: $updatehWishlistStatus, failure: $failure)';
+    return 'HomeState(fetchListStarshipsStatus: $fetchListStarshipsStatus, listStarships: $listStarships, fetchWishlistStatus: $fetchWishlistStatus, wishlist: $wishlist, filteredWishlist: $filteredWishlist, updatehWishlistStatus: $updatehWishlistStatus, failure: $failure)';
   }
 
   @override
@@ -268,6 +294,8 @@ class _$HomeStateImpl extends _HomeState {
             (identical(other.fetchWishlistStatus, fetchWishlistStatus) ||
                 other.fetchWishlistStatus == fetchWishlistStatus) &&
             const DeepCollectionEquality().equals(other._wishlist, _wishlist) &&
+            const DeepCollectionEquality()
+                .equals(other._filteredWishlist, _filteredWishlist) &&
             (identical(other.updatehWishlistStatus, updatehWishlistStatus) ||
                 other.updatehWishlistStatus == updatehWishlistStatus) &&
             (identical(other.failure, failure) || other.failure == failure));
@@ -280,6 +308,7 @@ class _$HomeStateImpl extends _HomeState {
       const DeepCollectionEquality().hash(_listStarships),
       fetchWishlistStatus,
       const DeepCollectionEquality().hash(_wishlist),
+      const DeepCollectionEquality().hash(_filteredWishlist),
       updatehWishlistStatus,
       failure);
 
@@ -298,6 +327,7 @@ abstract class _HomeState extends HomeState {
       final List<StarShipEntity> listStarships,
       final FetchDataStatus fetchWishlistStatus,
       final List<StarShipEntity> wishlist,
+      final List<StarShipEntity> filteredWishlist,
       final FetchDataStatus updatehWishlistStatus,
       final Failure? failure}) = _$HomeStateImpl;
   _HomeState._() : super._();
@@ -310,6 +340,8 @@ abstract class _HomeState extends HomeState {
   FetchDataStatus get fetchWishlistStatus;
   @override
   List<StarShipEntity> get wishlist;
+  @override
+  List<StarShipEntity> get filteredWishlist;
   @override
   FetchDataStatus get updatehWishlistStatus;
   @override

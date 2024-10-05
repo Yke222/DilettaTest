@@ -17,6 +17,8 @@ class WishListPage extends StatefulWidget {
 
 class _WishListPageState extends State<WishListPage> {
   final _controller = GetIt.I.get<HomeCubit>();
+  final _textController = TextEditingController();
+  final _debouncer = Debouncer();
 
   @override
   void initState() {
@@ -36,70 +38,98 @@ class _WishListPageState extends State<WishListPage> {
     _controller.removeFromWishlist(starChipEntity);
   }
 
+  void _onChangeFilter(String? value) {
+    if (value == null) {
+      return;
+    }
+
+    _debouncer.run(() {
+      _controller.filterWishList(value);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomeState>(
-      bloc: _controller,
-      listener: (context, state) {
-        state.updatehWishlistStatus.whenOrNull(
-          success: _controller.fetchWishlist,
-        );
-      },
-      builder: (context, state) {
-        return AppLoading(
-          loading: state.fetchWishlistStatus.isLoading,
-          child: Scaffold(
-            backgroundColor: AppColors.white,
-            appBar: AppBar(
-              title: Text(
-                'Minha WishList',
-                style: context.textTheme.displaySmall,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: BlocConsumer<HomeCubit, HomeState>(
+        bloc: _controller,
+        listener: (context, state) {
+          state.updatehWishlistStatus.whenOrNull(
+            success: _controller.fetchWishlist,
+          );
+        },
+        builder: (context, state) {
+          return AppLoading(
+            loading: state.fetchWishlistStatus.isLoading,
+            child: Scaffold(
+              backgroundColor: AppColors.white,
+              appBar: AppBar(
+                title: Text(
+                  'Minha WishList',
+                  style: context.textTheme.displaySmall,
+                ),
               ),
-            ),
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: state.wishlist.isEmpty
-                    ? const EmptyWidget()
-                    : CustomScrollView(
-                        slivers: [
-                          SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              childCount: state.wishlist.length,
-                              (_, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 4.0,
-                                  ),
-                                  child:
-                                  StarshipItemWidget(
-                                    title: state.wishlist[index].name,
-                                    description: state.wishlist[index].model,
-                                    starShipClass: state
-                                        .wishlist[index].starshipClass,
-                                    onTheWishlist: true,
-                                    onTapButton: () => _removeFromWishList(
-                                      state.wishlist[index],
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: state.wishlist.isEmpty
+                      ? const EmptyWidget()
+                      : CustomScrollView(
+                          slivers: [
+                            SliverToBoxAdapter(
+                              child: TextfieldWidget(
+                                controller: _textController,
+                                label: 'Buscar',
+                                suffix: const Icon(Icons.search),
+                                onChange: _onChangeFilter,
+                              ),
+                            ),
+                            const SliverToBoxAdapter(
+                              child: SizedBox(
+                                height: 16,
+                              ),
+                            ),
+                            SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                childCount: state.filteredWishlist.length,
+                                (_, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 4.0,
                                     ),
-                                    onTap: () => DetailsItemBottomSheet.show(
-                                      context: context,
-                                      starShipEntity: state.wishlist[index],
+                                    child: StarshipItemWidget(
+                                      title: state.filteredWishlist[index].name,
+                                      description:
+                                          state.filteredWishlist[index].model,
+                                      starShipClass: state
+                                          .filteredWishlist[index]
+                                          .starshipClass,
+                                      onTheWishlist: true,
                                       onTapButton: () => _removeFromWishList(
-                                        state.wishlist[index],
+                                        state.filteredWishlist[index],
+                                      ),
+                                      onTap: () => DetailsItemBottomSheet.show(
+                                        context: context,
+                                        starShipEntity:
+                                            state.filteredWishlist[index],
+                                        onTapButton: () => _removeFromWishList(
+                                          state.filteredWishlist[index],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

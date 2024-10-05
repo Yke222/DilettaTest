@@ -210,4 +210,33 @@ void main() {
       expect(cubit.state.fetchListStarshipsStatus.isSuccess, true);
     });
   });
+
+  test('Filter Wishlist Test - Success', () async {
+    when(() => homeRepository.fetchListStarShips()).thenAnswer(
+      (_) async => (null, list),
+    );
+    when(() => homeRepository.addToWishList(any())).thenAnswer(
+      (_) => null,
+    );
+
+    when(() => homeRepository.fetchWishList()).thenAnswer(
+      (_) => (null, list),
+    );
+
+    await cubit.fetchListStarships();
+    cubit.addToWishlist(entity);
+    cubit.fetchWishlist();
+    cubit.filterWishList('name');
+
+    expect(cubit.state.filteredWishlist.isNotEmpty, true);
+
+    cubit.filterWishList('teste');
+
+    expect(cubit.state.filteredWishlist.isEmpty, true);
+
+    verify(() => homeRepository.fetchListStarShips()).called(1);
+    verify(() => homeRepository.addToWishList(any())).called(1);
+    verify(() => homeRepository.fetchWishList()).called(1);
+    verifyNoMoreInteractions(homeRepository);
+  });
 }

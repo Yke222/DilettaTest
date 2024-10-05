@@ -1,17 +1,24 @@
 import 'package:dio/dio.dart';
 
-import './http_client.dart';
+import '../../connectivity/connectivity.dart';
+import '../adapter.dart';
 import 'handler_response.dart';
 
 class HttpClientImpl implements HttpClient {
   HttpClientImpl({
     required this.dioInstance,
+    required this.connectivity,
   });
 
   final Dio dioInstance;
+  final InternetConnectivity connectivity;
 
   Future<Response> _makeRequest(HttpRequest request) async {
     try {
+      if (!await connectivity.hasInternet()) {
+        throw const NotInternetException();
+      }
+
       final headers = <String, dynamic>{
         Headers.contentTypeHeader: 'application/json',
         Headers.acceptHeader: 'application/json',

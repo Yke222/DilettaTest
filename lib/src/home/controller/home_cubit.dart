@@ -21,6 +21,8 @@ class HomeCubit extends Cubit<HomeState> {
       ),
     );
 
+    await Future.delayed(Duration(seconds: 2));
+
     final (err, list) = await _repository.fetchListStarShips();
 
     if (err != null) {
@@ -46,7 +48,6 @@ class HomeCubit extends Cubit<HomeState> {
       state.copyWith(
         fetchWishlistStatus: const FetchDataStatus.loading(),
         updatehWishlistStatus: const FetchDataStatus.idle(),
-        failure: null,
       ),
     );
 
@@ -56,7 +57,6 @@ class HomeCubit extends Cubit<HomeState> {
       emit(
         state.copyWith(
           fetchWishlistStatus: const FetchDataStatus.error(),
-          failure: err,
         ),
       );
       return;
@@ -66,6 +66,7 @@ class HomeCubit extends Cubit<HomeState> {
       state.copyWith(
         fetchWishlistStatus: const FetchDataStatus.success(),
         wishlist: list ?? [],
+        filteredWishlist: list ?? [],
       ),
     );
   }
@@ -74,7 +75,6 @@ class HomeCubit extends Cubit<HomeState> {
     emit(
       state.copyWith(
         updatehWishlistStatus: const FetchDataStatus.loading(),
-        failure: null,
       ),
     );
 
@@ -84,7 +84,6 @@ class HomeCubit extends Cubit<HomeState> {
       emit(
         state.copyWith(
           updatehWishlistStatus: const FetchDataStatus.error(),
-          failure: err,
         ),
       );
       return;
@@ -101,7 +100,6 @@ class HomeCubit extends Cubit<HomeState> {
     emit(
       state.copyWith(
         updatehWishlistStatus: const FetchDataStatus.loading(),
-        failure: null,
       ),
     );
 
@@ -111,7 +109,6 @@ class HomeCubit extends Cubit<HomeState> {
       emit(
         state.copyWith(
           updatehWishlistStatus: const FetchDataStatus.error(),
-          failure: err,
         ),
       );
       return;
@@ -132,9 +129,11 @@ class HomeCubit extends Cubit<HomeState> {
     );
 
     final newList = List<StarShipEntity>.from(state.listStarships).toList();
-    final wishlist = state.wishlist.map(
-      (e) => e.name,
-    ).toList();
+    final wishlist = state.wishlist
+        .map(
+          (e) => e.name,
+        )
+        .toList();
 
     final updatedList = newList
         .map(
@@ -148,6 +147,30 @@ class HomeCubit extends Cubit<HomeState> {
       state.copyWith(
         listStarships: updatedList,
         fetchListStarshipsStatus: const FetchDataStatus.success(),
+      ),
+    );
+  }
+
+  void filterWishList(String value) {
+    emit(
+      state.copyWith(
+        fetchWishlistStatus: const FetchDataStatus.loading(),
+        filteredWishlist: state.wishlist,
+      ),
+    );
+
+    final wishlist = List<StarShipEntity>.from(state.wishlist).toList();
+
+    final filteredList = wishlist
+        .where(
+          (element) => element.name.toLowerCase().contains(value.toLowerCase()),
+        )
+        .toList();
+
+    emit(
+      state.copyWith(
+        filteredWishlist: filteredList,
+        fetchWishlistStatus: const FetchDataStatus.success(),
       ),
     );
   }

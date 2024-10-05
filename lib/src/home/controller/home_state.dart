@@ -14,6 +14,7 @@ class HomeState with _$HomeState {
     @Default([]) List<StarShipEntity> listStarships,
     @Default(FetchDataStatus.idle()) FetchDataStatus fetchWishlistStatus,
     @Default([]) List<StarShipEntity> wishlist,
+    @Default([]) List<StarShipEntity> filteredWishlist,
     @Default(FetchDataStatus.idle()) FetchDataStatus updatehWishlistStatus,
     Failure? failure,
   }) = _HomeState;

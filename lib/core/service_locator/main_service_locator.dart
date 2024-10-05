@@ -29,13 +29,15 @@ class MainServiceLocator extends Injector {
     i.registerLazySingleton<Dio>(
       () => CustomDioClient.initialize(
         baseUrl: apiUrl,
-        internetConnectivity: getIt.get<InternetConnectivity>(),
         debugMode: kDebugMode,
       ),
     );
 
     i.registerLazySingleton<HttpClient>(
-      () => HttpClientImpl(dioInstance: i.get()),
+      () => HttpClientImpl(
+        dioInstance: i.get(),
+        connectivity: getIt.get<InternetConnectivity>(),
+      ),
     );
 
     HomeInjector().inject();

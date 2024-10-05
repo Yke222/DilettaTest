@@ -79,8 +79,10 @@ class _HomePageState extends State<HomePage> {
       builder: (context, state) {
         return RefreshIndicator(
           onRefresh: _init,
-          child: (state.failure is NoInternetFailure)
-              ? const NoInternetPage()
+          child: (state.failure != null)
+              ? NoInternetPage(
+                onTapRetry: _init,
+              )
               : AppLoading(
                   loading: state.fetchListStarshipsStatus.isLoading,
                   child: Scaffold(
