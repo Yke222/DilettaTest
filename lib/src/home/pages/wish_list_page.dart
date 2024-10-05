@@ -73,9 +73,12 @@ class _WishListPageState extends State<WishListPage> {
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 4.0,
                                   ),
-                                  child: StarshipItemWidget(
+                                  child:
+                                  StarshipItemWidget(
                                     title: state.wishlist[index].name,
                                     description: state.wishlist[index].model,
+                                    starShipClass: state
+                                        .wishlist[index].starshipClass,
                                     onTheWishlist: true,
                                     onTapButton: () => _removeFromWishList(
                                       state.wishlist[index],

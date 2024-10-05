@@ -33,8 +33,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _init() async {
-    _controller.fetchListStarships();
+    await _controller.fetchListStarships();
     _controller.fetchWishlist();
+    _controller.updateCurrentList();
   }
 
   void _onTapButton(StarShipEntity starChipEntity) {
@@ -88,6 +89,7 @@ class _HomePageState extends State<HomePage> {
                   child: Scaffold(
                     backgroundColor: AppColors.white,
                     appBar: AppBar(
+                      scrolledUnderElevation: 0,
                       title: Text(
                         'Olá',
                         style: context.textTheme.displaySmall,
@@ -110,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     body: SafeArea(
                       child: Padding(
-                        padding: const EdgeInsets.all(24),
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: CustomScrollView(
                           slivers: [
                             SliverList(
@@ -123,6 +125,8 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     child: StarshipItemWidget(
                                       title: state.listStarships[index].name,
+                                      starShipClass: state
+                                          .listStarships[index].starshipClass,
                                       description:
                                           state.listStarships[index].model,
                                       onTheWishlist: state
