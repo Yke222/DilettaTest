@@ -1,0 +1,1 @@
+export 'starship_entity.dart';
