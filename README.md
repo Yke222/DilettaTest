@@ -33,12 +33,17 @@ Atualmente a estrutura do projeto está seguindo esse padrão:
  ┃ ┃ ┗ 📂 controller  
  ┃ ┣ 📂 features  
  ┃ ┃ ┣ 📂 featureA  
+ ┃ ┃ ┃ ┣ 📂 controller
  ┃ ┃ ┃ ┣ 📂 datasource
- ┃ ┃ ┃ ┣ 📂 repository
- ┃ ┃ ┃ ┣ 📂 models  
- ┃ ┃ ┃ ┣ 📂 screens  
+ ┃ ┃ ┃ ┣ 📂 entity
+ ┃ ┃ ┃ ┣ 📂 models
+ ┃ ┃ ┃ ┣ 📂 pages  
  ┃ ┃ ┃ ┃ ┣ 📂 widgets  
- ┃ ┃ ┃ ┗ 📂 controller
+ ┃ ┃ ┃ ┣ 📂 repository
+ ┃ ┃ ┃ ┣ 📜 di.dart  
+ ┃ ┃ ┃ ┣ 📜 feature.dart  
+ ┃ ┃ ┃ ┣ 📜 router.dart  
+ ┃ ┃ ┃ ┗ 📜 strings.dart  
  ┃ ┣ 📜 app.dart  
  ┃ ┗ 📜 router.dart  
  ┗ 📜 main.dart  
@@ -51,6 +56,14 @@ Atualmente a estrutura do projeto está seguindo esse padrão:
 `src` - Pasta que centraliza o código da aplicação
 
 `shared` - Armazena funcionalidades que podem ser compartilhadas
+
+`strings.dart` - Armazena todas as strings referentes aquela funcionalidade
+
+`router.dart` - Configura todas as rotas de navegação referentes aquela feautre
+
+`di.dart` - Configura a injeção de dependencias daquela feature
+
+`feature.dart` - Exporta todos os arquivos daquela feature
 
 
 ### 📋 Pré-requisitos

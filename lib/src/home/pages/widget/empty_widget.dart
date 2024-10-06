@@ -15,15 +15,15 @@ class EmptyWidget extends StatelessWidget {
         Image.asset(
           width: 150.w,
           height: 100.h,
-          'assets/images/empty.png',
+          AppImages.empty,
         ),
         Text(
-          'Nada salvo',
+          AppStrings.home.emptyTitle,
           textAlign: TextAlign.center,
           style: context.textTheme.headlineSmall,
         ),
         Text(
-          '''Ainda não tem nada na sua wishlist.''',
+          AppStrings.home.emptyDescription,
           textAlign: TextAlign.center,
           style: context.textTheme.titleLarge,
         ),

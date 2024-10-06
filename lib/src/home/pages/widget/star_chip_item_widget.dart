@@ -46,7 +46,7 @@ class StarshipItemWidget extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Descrição',
+                    AppStrings.home.starShipDataModel,
                     style: context.textTheme.bodySmall,
                   ),
                   const Spacer(),
@@ -62,7 +62,7 @@ class StarshipItemWidget extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Classe',
+                    AppStrings.home.starShipDataClass,
                     style: context.textTheme.bodySmall,
                   ),
                   const Spacer(),
@@ -80,7 +80,7 @@ class StarshipItemWidget extends StatelessWidget {
                   TextButton.icon(
                     onPressed: onTap,
                     label: Text(
-                      'Detalhes',
+                       AppStrings.home.details,
                       style: context.textTheme.labelLarge?.copyWith(
                         color: AppColors.info,
                       ),
@@ -94,8 +94,8 @@ class StarshipItemWidget extends StatelessWidget {
                     onPressed: onTapButton,
                     label: Text(
                       onTheWishlist
-                          ? 'Remover da lista de desejos'
-                          : 'Adicionar a lista de desejos',
+                          ? AppStrings.home.removeFromWishlist
+                          : AppStrings.home.addToWishlist,
                       style: context.textTheme.labelLarge?.copyWith(
                         color:
                             onTheWishlist ? AppColors.danger : AppColors.info,

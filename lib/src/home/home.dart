@@ -5,3 +5,4 @@ export 'model/model.dart';
 export 'pages/pages.dart';
 export 'repository/repository.dart';
 export 'router.dart';
+export 'strings.dart';

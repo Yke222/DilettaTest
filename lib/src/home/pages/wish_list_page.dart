@@ -73,7 +73,7 @@ class _WishListPageState extends State<WishListPage> {
               backgroundColor: AppColors.white,
               appBar: AppBar(
                 title: Text(
-                  'Minha WishList',
+                  AppStrings.home.myWishlist,
                   style: context.textTheme.displaySmall,
                 ),
               ),
@@ -87,7 +87,7 @@ class _WishListPageState extends State<WishListPage> {
                             SliverToBoxAdapter(
                               child: TextfieldWidget(
                                 controller: _textController,
-                                label: 'Buscar',
+                                label: AppStrings.home.search,
                                 suffix: const Icon(Icons.search),
                                 onChange: _onChangeFilter,
                               ),

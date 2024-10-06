@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
     _controller.updateCurrentList();
 
     Toast.show(
-      message: 'Lista de desejos atualizada',
+      message: AppStrings.home.listUpdated,
       type: ToastType.success,
       context: context,
     );
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                         : AppBar(
                             scrolledUnderElevation: 0,
                             title: Text(
-                              'Olá',
+                              AppStrings.home.helloText,
                               style: context.textTheme.displaySmall,
                             ),
                             actions: [

@@ -83,39 +83,39 @@ class _DetailsItemBottomSheet extends State<DetailsItemBottomSheet> {
             height: 8.h,
           ),
           _TitleDescriptionWidget(
-            title: 'Modelo',
+            title: AppStrings.home.starShipDataModel,
             description: widget.starShipEntity.model,
           ),
           _TitleDescriptionWidget(
-            title: 'Tamanho',
+            title: AppStrings.home.starShipDataSize,
             description: widget.starShipEntity.length,
           ),
           _TitleDescriptionWidget(
-            title: 'Valor',
+            title: AppStrings.home.starShipDataValue,
             description: widget.starShipEntity.costInCredits,
           ),
           _TitleDescriptionWidget(
-            title: 'Classe',
+            title: AppStrings.home.starShipDataClass,
             description: widget.starShipEntity.starshipClass,
           ),
           _TitleDescriptionWidget(
-            title: 'Capacidade de passageiros',
+            title: AppStrings.home.starShipDataPassengers,
             description: widget.starShipEntity.passengers,
           ),
           _TitleDescriptionWidget(
-            title: 'Capacidade de carga',
+            title: AppStrings.home.starShipDataCapacity,
             description: widget.starShipEntity.cargoCapacity,
           ),
           _TitleDescriptionWidget(
-            title: 'Velocidade máxima',
+            title: AppStrings.home.starShipDataMaxSpeed,
             description: widget.starShipEntity.maxAtmospheringSpeed,
           ),
           TextButton.icon(
             onPressed: _onTapButton,
             label: Text(
               widget.starShipEntity.onTheWishlist
-                  ? 'Remover da lista de desejos'
-                  : 'Adicionar a lista de desejos',
+                  ? AppStrings.home.removeFromWishlist
+                  : AppStrings.home.addToWishlist,
               style: context.textTheme.labelLarge?.copyWith(
                 color: widget.starShipEntity.onTheWishlist
                     ? AppColors.danger
