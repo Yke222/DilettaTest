@@ -1,13 +1,30 @@
-# DilettaTest
+# DilettaTest - Johnny Fagundes
 
-Desafio técnico - Flutter
+This is a Flutter-based wishlist application that demonstrates the use of state management, localization, dependency injection, local storage, and more. The app connects to the [Fake Store API](https://fakestoreapi.com/) to retrieve products, allowing users to manage a wishlist.
 
-Desafio: Essa é uma vaga para desenvolvedor Flutter (Mobile), e pensamos em um teste simples para avaliar o desempenho na stack. A ideia desse desafio é criar uma aplicação de listagem de produtos.
+## Features
 
-Na escolha do backend também deixaremos livre, os dados podem ser adquiridos de uma API free, ou mesmo podem ser adicionados via https://mockapi.io/
+- **View Products**: Browse a list of products retrieved from the Fake Store API.
+- **Add to Wishlist**: Add items to the wishlist.
+- **Remove from Wishlist**: Remove individual items from the wishlist.
+- **Clear Wishlist**: Clear all items from the wishlist.
 
-Componentes: Faça a listagem como bem entender, traga os produtos do backend via API e crie uma wishlist baseada nessa lista de produtos. Basicamente é adicionar alguns produtos nessa lista de desejos. Você tem autonomia no design, pode colocar em duas telas, uma página à parte, você é o dono da aplicação.
+## Technologies Used
 
-Regras de Negócio: Cada usuário poderá criar sua própria wishlist. Você é livre para escolher qual gerenciador de estado prefere, adicione os filtros que achar pertinente para a manipulação da wishlist.
+### 1. State Management
+- **ValueNotifier**: Used to manage the state of the wishlist efficiently and notify listeners when the state changes.
 
-A ideia será criar um pull request nesse repositório para ser avaliado.
+### 2. Localization (L10n)
+- **L10n with Flutter**: Added support for localization, with both English and Portuguese (`en`, `pt_BR`). This allows the app to switch between these languages seamlessly.
+
+### 3. Dependency Injection
+- **GetIt**: Used as a service locator for dependency injection, making the app modular and testable.
+
+### 4. Local Storage
+- **Hive**: Used to persist wishlist data locally on the device.
+
+### 5. Networking
+- **Dio**: Used for making HTTP requests to the [Fake Store API](https://fakestoreapi.com/).
+
+### 6. Testing
+- **Mockito**: Unit tests for the application are written using the Mockito package to mock dependencies and test the ViewModel logic.
