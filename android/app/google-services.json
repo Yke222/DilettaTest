@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "239765368515",
+    "project_id": "wishlist-987ee",
+    "storage_bucket": "wishlist-987ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239765368515:android:18868f4894aed4d1b87c76",
+        "android_client_info": {
+          "package_name": "com.gabriellarthur.wishlist.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlh4mfgz7bQjE2B57ggxvDgfJvIdgfrvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

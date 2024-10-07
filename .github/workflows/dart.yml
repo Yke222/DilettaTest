@@ -1,0 +1,47 @@
+name: Dart and Flutter
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name != 'delete'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '3.24.2'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Check for recommended changes
+        run: |
+          proposed_fixes=$(dart fix --dry-run | grep "proposed fixes" | awk '{print $1}')
+          if [[ $proposed_fixes -gt 1 ]]; then
+            echo "More than one proposed fix found. Failing the workflow."
+            dart fix --apply 
+            exit 1
+          fi
+        shell: /usr/bin/bash -e {0}
+
+      - name: Analyze project source
+        run: |
+          proposed_fixes=$(dart analyze --fatal-infos | grep "proposed fixes" | awk '{print $1}')
+          if [[ $proposed_fixes -gt 1 ]]; then
+            echo "More than one proposed fix found. Failing the workflow."
+            exit 1
+          fi
+        shell: /usr/bin/bash -e {0}
+
+      - name: Run tests
+        run: flutter test
