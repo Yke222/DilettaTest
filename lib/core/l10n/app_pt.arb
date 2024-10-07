@@ -1,0 +1,13 @@
+{
+  "problem_to_fetch_data": "Ops!, Ocorreu um problema ao buscar os dados... ",
+  "products": "Produtos",
+  "categories": "Categorias",
+  "all": "Todas",
+  "product_already_in_wishlist": "Produto já está na sua lista de desejos",
+  "product_added_to_wishlist": "Produto adicionado à lista de desejos!",
+  "add_product_to_wishlist": "Adicionar produto a lista de desejos",
+  "your_wishlist": "Sua lista de desejos",
+  "wishlist_is_empty": "Sua lista de desejos esta vazia",
+  "clear_wishlist": "Limpar lista de desejos",
+  "try_again": "Tentar novamente"
+}

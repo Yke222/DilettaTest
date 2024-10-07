@@ -1,0 +1,14 @@
+{
+  "problem_to_fetch_data": "Oops! There was a problem fetching the data... ",
+  "products": "Products",
+  "categories": "Categories",
+  "all": "All",
+  "product_already_in_wishlist": "Product is already in your wishlist",
+  "product_added_to_wishlist": "Product added to wishlist!",
+  "add_product_to_wishlist": "Add product to wishlist",
+  "your_wishlist": "Your wishlist",
+  "wishlist_is_empty": "Your wishlist is empty",
+  "clear_wishlist": "Clear wishlist",
+  "try_again": "Try again"
+
+}
