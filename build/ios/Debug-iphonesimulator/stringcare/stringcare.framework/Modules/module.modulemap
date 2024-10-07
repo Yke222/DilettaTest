@@ -1,0 +1,11 @@
+framework module stringcare {
+  umbrella header "stringcare-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module stringcare.Swift {
+  header "stringcare-Swift.h"
+  requires objc
+}
