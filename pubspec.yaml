@@ -1,0 +1,30 @@
+name: diletta_shop
+description: "Online shopping for organic products"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  flutter_bloc: ^8.1.6
+  bloc_test: ^9.1.7
+  mocktail: ^1.0.4
+  get_it: ^8.0.0
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+  dio: ^5.7.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
